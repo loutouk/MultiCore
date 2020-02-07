@@ -1,0 +1,35 @@
+a. Expliquez pourquoi l’implémentation fournie ne fonctionne pas.
+
+Cette solution mène à un deadlock.
+Dans cette implémentation, chaque philosophe tente de prendre la baguette à sa gauche puis celle à sa droite.
+Or, la baguette entre deux philosophes est partagée par ces deux-là.
+Une baguette droite pour un philosophe est une baguette gauche pour son voisin de droite.
+Une baguette gauche pour un philosophe est une baguette droite pour son voisin de gauche.
+Donc les philosophes commencent par prendre une baguette gauche qui est la baguette droite d'un autre philosophe.
+Ainsi, il y a un interblocage lors de la deuxième phase, car tous les philosophes attendent leur baguette droite.
+Or, cette baguette a été prise juste avant par leur voisin de droite.
+
+b. En utilisant un théorème du cours, proposez une solution deadlock-free.
+
+Théorème
+Supposons qu’il y a un ordre sur les verrous v1 ≤ v2 ≤ · · · ≤ vn
+Supposons qu’aucun thread ne cherche a obtenir v alors qu’il possède déjà v0 avec v ≤ v0
+Alors l’exécution ne comporte pas de deadlock
+
+Si l'on considère l'ordre des verrous sur les baguettes démarrant par le philosophe avec l'id. égal à 0.
+Alors ce philosophe doit prendre sa baguette de gauche puis celle de droite.
+Et les autres doivent prendre leur baguette de droite puis celle de gauche.
+Ainsi, ils respectent l'ordre (arbitraire) des baguettes.
+Peu importe l'ordre de libération des baguettes.
+
+c. Implémentez et testez votre solution.
+
+Voir SmartPhilosopher.java
+
+d. Cette solution est-elle starvation-free ?
+
+Non, la solution proposée ne garantit pas l'absence de famine.
+Par exemple, il se peut que ce soit toujours le même philosophe qui mange,
+car une "race condition" fait qu'il accède au verrou avant les autres.
+Une solution est d'utiliser l'approche de Chandy et Misra.
+

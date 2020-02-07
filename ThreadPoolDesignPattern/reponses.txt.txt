@@ -1,0 +1,3 @@
+3.2 Architecture du programme
+Identifiez la partie de la methode Client.paintComponent() qui utilise le future et expliquez son fonctionnement.
+
