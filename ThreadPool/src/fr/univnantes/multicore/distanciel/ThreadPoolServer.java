@@ -5,6 +5,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
+ * Author: Louis Boursier
+ */
+
+/**
  * Server that uses a thread pool to automatically dispatch the tasks
  */
 public class ThreadPoolServer implements Server {

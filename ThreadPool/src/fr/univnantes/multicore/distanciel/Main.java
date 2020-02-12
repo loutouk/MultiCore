@@ -10,7 +10,8 @@ public class Main {
          * TODO: The server has to be replaced by a one using a thread pool
          */
         //Server server = new NaiveServer();
-        Server server = new ThreadPoolServer(8);
+        //Server server = new ThreadPoolServer(4);
+        Server server = new PriorityThreadPoolServer(32);
 
         Client client = new Client(server);
 
@@ -28,9 +29,9 @@ public class Main {
          *   - y_max.
          */
         //client.setCoordinates(-2.25, -1, 0.75, 1);  // Full Mandelbrot set
-        // client.setCoordinates(-1.5, -0.1, -1.2, 0.1);  // Biggest circle
+        //client.setCoordinates(-1.5, -0.1, -1.2, 0.1);  // Biggest circle
         client.setCoordinates(-1.5, -0.01, -1.47, 0.01);  // Replicate on the left
-        // client.setCoordinates(-0.65, -0.72, -0.32, -0.5);  // Side of the cardioid
+        //client.setCoordinates(-0.65, -0.72, -0.32, -0.5);  // Side of the cardioid
 
         /*
          * Number of pixels in the window :
@@ -54,7 +55,7 @@ public class Main {
         // The NaiveServer class is so bad it has to cheat
         if(server.getClass() == NaiveServer.class){
             client.setResolution(18, 12, 40, 40);
-            client.setThreshold(1000);
+            client.setThreshold(100000);
         }
 
         client.start();

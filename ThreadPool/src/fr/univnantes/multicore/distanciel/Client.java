@@ -6,12 +6,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Future;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * 
@@ -38,6 +40,8 @@ public class Client extends JPanel implements ActionListener {
 	private boolean started = false;
 	private boolean done = false;
 	private ColorMap colorMap = new ColorMap(Color.white);
+	private BufferedImage bImage =
+			new BufferedImage(x_nb_blocks*x_block_size, y_nb_blocks*y_block_size, BufferedImage.TYPE_INT_RGB);
 
 	private static final long serialVersionUID = 1L;
 	private final Timer timer = new Timer(100, this);
@@ -165,16 +169,33 @@ public class Client extends JPanel implements ActionListener {
 				 * blocks are drawn only when after they have been computed
 				 */
 				if (blocks[i].isDone()){
-					blocks[i].get().draw(g, colorMap);
+					blocks[i].get().draw(g, colorMap, bImage);
 					nbDone++;
 				}
 			}
 			if(!done && nbDone == blocks.length){
 				done = true;
 				System.out.println("Computation terminated within " + (double)(System.currentTimeMillis() - beginningTime) / 1000 + " s.");
+				//saveToImage(graphics);
 			}
 		} catch (Exception e) {
 			throw new Error("Future.get is not supposed to block when isDone returned true");
+		}
+	}
+
+	private void saveToImage(Graphics graphics) {
+		JFileChooser filechooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"JPG Images", "jpg");
+		filechooser.setFileFilter(filter);
+		int result = filechooser.showSaveDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			File saveFile = filechooser.getSelectedFile();
+			try {
+				ImageIO.write(bImage, "jpg", saveFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

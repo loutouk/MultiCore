@@ -3,6 +3,7 @@ package fr.univnantes.multicore.distanciel;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.image.BufferedImage;
 
 /**
  * Class in charge of computing and storing a square image of a part of the Mandelbrot set
@@ -28,15 +29,19 @@ public class Block {
 
 	/**
 	 * Draws the square block on a given panel
-	 * @param g2 object that describes the panel on which to draw
-	 * @param colorMap object that describes the color to give to each pixel
-	 */
-	public void draw(Graphics2D g2, ColorMap colorMap){
+     * @param g2ForScreen object that describes the panel on which to draw
+     * @param colorMap object that describes the color to give to each pixel
+     * @param bImage
+     */
+	public void draw(Graphics2D g2ForScreen, ColorMap colorMap, BufferedImage bImage){
+		Graphics2D g2ForJPEG = bImage.createGraphics();
 		for(int i = 0; i < pixel.length; i++){
 			for(int j = 0; j < pixel[0].length; j++){
 				Shape point = new Rectangle(x_pix+i, y_pix+j, 1, 1);
-				g2.setPaint(colorMap.get(pixel[i][j]));
-				g2.fill(point);
+				g2ForScreen.setPaint(colorMap.get(pixel[i][j]));
+				g2ForScreen.fill(point);
+				//g2ForJPEG.setPaint(colorMap.get(pixel[i][j]));
+				//g2ForJPEG.fill(point);
 			}
 		}
 	}
