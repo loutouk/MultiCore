@@ -19,9 +19,6 @@ public class BlockingQueue {
         }else{
             this.queue.addLast(item);
         }
-        if(this.queue.size() == 1) {
-            notifyAll();
-        }
     }
 
     public synchronized Object dequeue() throws InterruptedException{
