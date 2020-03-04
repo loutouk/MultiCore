@@ -4,26 +4,43 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * @author Louis Boursier
+ */
 
 public class WebGrep {
 
     // TODO: wrap all producer consumer related objects in a class and feed it to their constructor
 
+
+    static ExecutorService threadPool;
+
+
+    // for producer consumer pattern used for printing webpages
     static final int MAX_BUFFER_SIZE = 100; // no need to be atomic because it will be used within locks
     static final Lock lock = new ReentrantLock();
     static final Condition notFull = lock.newCondition();
     static final Condition notEmpty = lock.newCondition();
-
-    // producer consumer for printing
     // having more than one printTask speeds up printing but may cause overlaps in printings
     static private final int PRINTER_THREADS = 1;
-    static ConcurrentSkipListSet<String> explored = new ConcurrentSkipListSet<>(); // remembers explored addresses
-    static ExecutorService threadPool;
     static int bufferCounter = 0; // no need to be atomic because it will be used within locks
     static LinkedList<ParsedPage> buffer = new LinkedList<>(); // buffer for producer consumer printing
+
+
+    // used if we are not using the dictionary for keeping track of the explored addresses
+    static ConcurrentSkipListSet<String> explored = new ConcurrentSkipListSet<>(); // remembers explored addresses
+
+    // for lock free version of the task
+    static final AtomicReference<DictionaryImmutable> dictionaryPointer = new AtomicReference<>();
+    static DictionaryImmutable dictionary = new DictionaryImmutable();
+
+    // for wait free version of the task
+    static final DictionaryWaitFree dictionaryWaitFree = new DictionaryWaitFree();
 
     public static void main(String[] args) {
         // Initialize the program using the options given in argument
@@ -43,8 +60,12 @@ public class WebGrep {
             thread.start(); // runs a thread for printing parsed pages
         }
 
+        dictionaryPointer.set(dictionary);
+
         // Get the starting URL given in argument
         for (String address : Tools.startingURL()) {
+            //ExploreTask newTask = new ExploreTask(address);
+            //ExploreTaskLockFree newTask = new ExploreTaskLockFree(address);
             ExploreTask newTask = new ExploreTask(address);
             threadPool.submit(newTask);
         }

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1002e77-e8fe-4b52-9ab2-c9e40cbca3ad" name="Default Changelist" comment="" />
+    <list default="true" id="a1002e77-e8fe-4b52-9ab2-c9e40cbca3ad" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryWaitFree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskLockFree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskWaitFree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ThreadPool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ThreadPool/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +25,42 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/ConcurrentSkipListSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="239" column="19" selection-start-line="239" selection-start-column="19" selection-end-line="239" selection-end-column="19" />
+              <folding>
+                <element signature="e#8254#8255#0" expanded="true" />
+                <element signature="e#8315#8316#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -25,16 +71,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>the bathr</find>
-      <find>male 2 in the que</find>
-      <find>female 0</find>
-      <find>77983dcb</find>
-      <find>my t</find>
-      <find>783a3179</find>
-      <find>1ca8d8d2</find>
-      <find>toStr</find>
-      <find>3</find>
-      <find>wai</find>
+      <find>https://fr.wikipedia.org/wiki/France: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Pays_de_la_Loire: 13</find>
+      <find>https://fr.wikipedia.org/wiki/Canton_de_Nantes-7: 10</find>
+      <find>https://fr.wikipedia.org/wiki/Royal_de_luxe: 6</find>
+      <find>https://fr.wikipedia.org/wiki/Orvault: 28</find>
+      <find>https://fr.wikipedia.org/wiki/Passage_Pommeraye: 20</find>
+      <find>https://fr.wikipedia.org/wiki/Botti%C3%A8re: 5</find>
+      <find>https://fr.wikipedia.org/wiki/Le_Tripode: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Blain: 6</find>
+      <find>https://fr.wikipedia.org/wiki/Tramway_de_Nantes: 18</find>
+      <find>https://fr.wikipedia.org/wiki/Fichier:Nantes_-_Erdre.jpg: 1</find>
+      <find>https://fr.wikipedia.org/wiki/Canton_de_Nantes-5: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Comblements_de_Nantes: 20</find>
+      <find>https://fr.wikipedia.org/wiki/Ancenis: 17</find>
+      <find>https://so.wikipedia.org/wiki/Nantes: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Nantes_(homonymie): 2</find>
+      <find>https://fr.wikipedia.org/wiki/Les_Machines_de_l%27%C3%AEle: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Le_Lieu_unique: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Fichier:Nantes_logo.png: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Loire: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Arrondissement_de_Nantes: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Ch%C3%A2teau_des_ducs_de_Bretagne: 50</find>
+      <find>https://fr.wikipedia.org/wiki/Johanna_Rolland: 10</find>
+      <find>https://www.nantes.fr/: 5</find>
+      <find>https://fr.wikipedia.org/wiki/Bretons: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Rennes: 6</find>
+      <find>https://fr.wikipedia.org/wiki/Nantes: 224</find>
+      <find>https://fr.wikipedia.org/wiki/Quai_Ernest-Renaud: 5</find>
+      <find>https://fr.wikipedia.org/wiki/Erdre: 6</find>
+      <find>https://fr.wikipedia.org/wiki/Anne_de_Bretagne: 7</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -46,18 +112,26 @@
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/examples/universal/Example.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/Main.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/ParallelBathroom.java" />
-        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/StarvingPhilosopher.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/SmartPhilosopher.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/Main.java" />
         <option value="$PROJECT_DIR$/TP/tp1.txt" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Tmp.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Tools.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/PrintTask.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Test.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryNotThreadSafe.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskDictionary.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryThreadSafe.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Dictionary.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryLockFree.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ImmutableDictionary.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskLockFree.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskWaitFree.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryWaitFree.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" />
       </list>
     </option>
   </component>
@@ -80,12 +154,60 @@
               <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
               <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+              <item name="tp1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+              <item name="tp2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+              <item name="tp2" type="462c0819:PsiDirectoryNode" />
+              <item name="philosopher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+              <item name="tp2" type="462c0819:PsiDirectoryNode" />
+              <item name="unisex" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MulticorePrograming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MulticorePrograming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="multicore" type="462c0819:PsiDirectoryNode" />
+              <item name="tp3" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -104,7 +226,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.WebGrep">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.tp2.philosopher.Main" />
       <module name="MulticorePrograming" />
@@ -131,8 +253,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.tp3.Test" />
+      <module name="MulticorePrograming" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.univnantes.multicore.tp3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tmp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.tp3.Tmp" />
+      <module name="MulticorePrograming" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.univnantes.multicore.tp3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebGrep" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.tp3.WebGrep" />
+      <module name="MulticorePrograming" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.univnantes.multicore.tp3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.WebGrep" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Tmp" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
@@ -153,8 +317,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.26096824" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2193646" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -163,7 +328,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32872504" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32411674" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -193,25 +358,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2233#2234#0" expanded="true" />
-            <element signature="e#2362#2363#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -270,6 +416,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/StarvingPhilosopher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/SmartPhilosopher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -277,10 +430,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/philosopher/StarvingPhilosopher.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Tmp.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ParsedPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="25" />
+        <state relative-caret-position="81">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryNotThreadSafe.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="109" column="25" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="25" />
+          <folding>
+            <element signature="e#6114#6115#0" expanded="true" />
+            <element signature="e#6157#6158#0" expanded="true" />
+            <element signature="e#7257#7258#0" expanded="true" />
+            <element signature="e#7303#7304#0" expanded="true" />
+            <element signature="e#7348#7349#0" expanded="true" />
+            <element signature="e#7394#7395#0" expanded="true" />
+            <element signature="e#7437#7438#0" expanded="true" />
+            <element signature="e#7481#7482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/PrintTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="93" selection-start-line="28" selection-start-column="93" selection-end-line="28" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskDictionary.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryThreadSafe.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryLockFree.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Dictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryWaitFree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="82" selection-start-line="20" selection-start-column="82" selection-end-line="20" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskWaitFree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+          <folding>
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/FairParallelBathroom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="31" column="81" selection-start-line="31" selection-start-column="81" selection-end-line="31" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskLockFree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/ConcurrentSkipListSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="239" column="19" selection-start-line="239" selection-start-column="19" selection-end-line="239" selection-end-column="19" />
+          <folding>
+            <element signature="e#8254#8255#0" expanded="true" />
+            <element signature="e#8315#8316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
         </state>
       </provider>
     </entry>

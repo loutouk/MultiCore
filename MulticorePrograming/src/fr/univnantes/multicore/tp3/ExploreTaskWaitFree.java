@@ -6,7 +6,7 @@ import java.io.IOException;
  * @author: Louis Boursier
  */
 
-public class ExploreTask implements Runnable {
+public class ExploreTaskWaitFree implements Runnable {
 
     private String address;
 
@@ -14,7 +14,7 @@ public class ExploreTask implements Runnable {
      *
      * @param address the address to parse
      */
-    public ExploreTask(String address) {
+    public ExploreTaskWaitFree(String address) {
         this.address = address;
     }
 
@@ -26,12 +26,9 @@ public class ExploreTask implements Runnable {
         try {
             /*
              *  Check that the page was not already explored and adds it
-             *  Get and set operations should be atomic to not store duplicates
-             *  Use ConcurrentSkipListSet data structure
-             *  Also add operation can fail if a string is already present because of concurrency
-             *  WebGrep.explored.add operation is atomic
              */
-            if (!WebGrep.explored.contains(address) && WebGrep.explored.add(address)) {
+            if (WebGrep.dictionaryWaitFree.add(address)) {
+
                 // Parse the page to find matches and hypertext links
                 ParsedPage page = Tools.parsePage(address);
                 if (!page.matches().isEmpty()) {
@@ -66,7 +63,7 @@ public class ExploreTask implements Runnable {
 
                     // Recursively explore other pages
                     for (String href : page.hrefs()) {
-                        ExploreTask newTask = new ExploreTask(href);
+                        ExploreTaskWaitFree newTask = new ExploreTaskWaitFree(href);
                         WebGrep.threadPool.submit(newTask);
                     }
                 }

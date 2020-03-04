@@ -11,8 +11,7 @@ public class FairParallelBathroom implements Bathroom {
     int availableRooms;
     int usedRooms = 0;
     // for each person in the queue we have a condition
-    // creating Condition in a queue allows to control which thread we notify
-    // it is not the case with notify() or notifyAll()
+    // creating Condition in a queue allows to control which thread we notify (with signal())
     LinkedList<Condition> queue = new LinkedList<>();
     private final Lock lock = new ReentrantLock();
     int nbBathroom;
