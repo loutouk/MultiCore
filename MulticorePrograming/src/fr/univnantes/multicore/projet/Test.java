@@ -1,10 +1,23 @@
 package fr.univnantes.multicore.projet;
 
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * @author Louis boursier
+ * Date: 15/03/2020
+ */
 public class Test {
 
-    public static volatile Register r = new Register(Main.globalClock.get(), 0);
-    private static int THREAD_NB = 8;
-    private static int COUNTER = 100;
+    // TODO: can we use one clock per register to reduce date incoherence abortion?
+    public static AtomicInteger globalClock = new AtomicInteger(0);
+
+    public static volatile Register r1 = new Register(Test.globalClock.get(), 0);
+    public static volatile Register r2 = new Register(Test.globalClock.get(), 0);
+    private static final int INCREMENT_R1 = 1;
+    private static final int INCREMENT_R2 = 10;
+    private static final int THREAD_NB = 4;
+    private static final int COUNTER = 10;
 
     public static void main(String[] args) {
 
@@ -17,7 +30,16 @@ public class Test {
                     while (!t.isCommited()) {
                         try {
                             t.begin();
-                            r.write(t, (int) r.read(t) + 1);
+                            int valA = (int) r1.read(t) + INCREMENT_R1;
+                            int valB = (int) r2.read(t) + INCREMENT_R2;
+                            // artificially generates concurrency problems
+                            try{
+                                Thread.sleep(Math.abs(new Random().nextInt()%500));
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            r1.write(t, valA);
+                            r2.write(t, valB);
                             t.tryToCommit();
                         } catch (CustomAbortException e) {
                             e.printStackTrace();
@@ -28,31 +50,13 @@ public class Test {
         }
 
         for(int i=0 ; i<THREAD_NB ; i++){ threads[i].start(); }
+        for(int i=0 ; i<THREAD_NB ; i++){ try { threads[i].join(); } catch (InterruptedException e) { e.printStackTrace(); } }
 
-        for(int i=0 ; i<THREAD_NB ; i++){
-            try {
-                threads[i].join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        System.out.println("Register 1 = " + r1.getValue() + " | Clock = " + Test.globalClock.get());
+        System.out.println("Register 2 = " + r2.getValue() + " | Clock = " + Test.globalClock.get());
 
-
-        System.out.println("Register = " + r.getValue());
-        System.out.println("Clock = " + Main.globalClock.get());
-
-        // on first register read, we add it to the lrst list of the transaction (because local copy of register is null)
-        // this has for effect to throw an exception during the commit because the the lrst list contains this register
-        // and this same register is also contained in the lwst list because it has been used for a write
-        // so it has been locked during the commit function, and the exception is thrown because this register is locked in lrst
-        // so the transaction will need a second try, and this time there will not be the register in the lrst list
-        // because the commit clears the list, and the second call to read will not add the register to lrst (local copy not null)
-        // on the second try, the counter will have been incremented two times
-        // this is because it retrieves the incremented counter of the first try on the read call
-        // !!!UNLESS!!! a local copy has been created elsewhere with a read call on the register
-        // this is why the register might vary in the range of the +1 (first read on the register)
-        // !!!this is only specific to thread transaction code in the lambda expression above!!!
-        assert ((int)r.getValue() >= THREAD_NB*COUNTER) && ((int)r.getValue() <= THREAD_NB*COUNTER + 1);
+        assert ((int)r1.getValue() == THREAD_NB*COUNTER*INCREMENT_R1);
+        assert ((int)r2.getValue() == THREAD_NB*COUNTER*INCREMENT_R2);
     }
 
 }

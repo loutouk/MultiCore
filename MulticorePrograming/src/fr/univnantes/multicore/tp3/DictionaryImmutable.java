@@ -3,7 +3,7 @@ package fr.univnantes.multicore.tp3;
 
 /**
  * See {@link Dictionary}
- * Because this class has been made immutable, it should be thread safe
+ * Because this class has been made immutable, should be thread safe when used with an optimistic locking technique
  *
  * @author Matthieu Perrin, Louis Boursier
  *

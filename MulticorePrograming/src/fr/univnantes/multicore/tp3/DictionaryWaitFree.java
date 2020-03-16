@@ -14,7 +14,8 @@ public class DictionaryWaitFree {
     // The empty string is stored separately
     private boolean emptyAbsent = true;
 
-    private ConcurrentLinkedQueue<String> addressesQueue = new ConcurrentLinkedQueue<>(); // wait free queue
+    // Queue data structure based on efficient "wait-free" algorithm by Maged M. Michael and Michael L. Scott.
+    private ConcurrentLinkedQueue<String> addressesQueue = new ConcurrentLinkedQueue<>();
 
     public boolean add(String s){
         addressesQueue.add(s);

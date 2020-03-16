@@ -2,41 +2,52 @@ package fr.univnantes.multicore.projet;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * @author Louis boursier
+ * Date: 15/03/2020
+ */
 public class Register<T> implements IRegister {
 
-    private int date; // date for which the last transaction was committed in this register
-    private T value; // last value
-    private Register localCopy; // might replace value if its transaction is committed (called lcx in material)
-    private ReentrantLock lock;
+    // shared values between thread should either be declared final or volatile
+    // even though ReentrantLock implements Lock that ensures the updates to memory is seen by other threads (doc)
+    private volatile int date; // date for which the last transaction was committed in this register
+    private volatile T value; // last value
+    private ReentrantLock lock; // lock used during the commit function of the transaction (volatile by default)
+    private volatile Transaction lastTransactionWriter; // reference to the last transaction that wrote to our value
 
     public Register(int date, T value) {
         this.date = date;
         this.value = value;
-        this.localCopy = null;
+        this.lastTransactionWriter = null;
         this.lock = new ReentrantLock(true); // true parameter for fairness to avoid starvation
     }
 
     private Register makeCopy() {
         Register copy = new Register(this.date, this.value); // shallow copy
-        copy.lock = this.lock; // TODO verify (if it is a copy we should reference the same lock?)
+        copy.lock = this.lock;
         return copy;
     }
 
     @Override
     public void write(Transaction transaction, Object value) {
-        if(localCopy == null){ localCopy = this.makeCopy(); }
-        localCopy.value = value;
+        if(transaction.getLocalCopies().get(this) == null){
+            transaction.getLocalCopies().put(this,this.makeCopy());
+        }
+        transaction.getLocalCopies().get(this).setValue(value);
         transaction.getLocallyWritten().add(this);
+        lastTransactionWriter = transaction; // used for the read method
     }
 
     @Override
     public Object read(Transaction transaction) throws CustomAbortException {
-        if(localCopy != null){ return localCopy.value; }
-        else {
-            localCopy = this.makeCopy();
+        // if the register has been written by the same transaction, we return its value
+        if(transaction.getLocalCopies().get(this) != null && lastTransactionWriter ==transaction){
+            return transaction.getLocalCopies().get(this).value;
+        } else {
+            transaction.getLocalCopies().put(this, this.makeCopy());
             transaction.getLocallyRead().add(this);
-            if(localCopy.date > transaction.getBirthdate()){ throw new CustomAbortException("Date incoherence"); }
-            else{ return localCopy.value; }
+            if(transaction.getLocalCopies().get(this).date > transaction.getBirthdate()){ throw new CustomAbortException("Date incoherence"); }
+            else{ return transaction.getLocalCopies().get(this).value; }
         }
     }
 
@@ -54,10 +65,6 @@ public class Register<T> implements IRegister {
 
     public void setValue(T value) {
         this.value = value;
-    }
-
-    public Register getLocalCopy() {
-        return localCopy;
     }
 
     public ReentrantLock getLock() {
