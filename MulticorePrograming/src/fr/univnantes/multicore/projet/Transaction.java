@@ -69,7 +69,7 @@ public class Transaction implements ITransaction{
                     //    happens when same register is read and written in the same transaction
                     //    following exception will be raised
                     // TODO isLocked() is outdated once called: is it a problem? I do not think so...
-                    if(lrst.getLock().isLocked()) { throw new CustomAbortException("Read/Write incoherence"); }
+                    if(lrst.getLock().isLocked()) { throw   new CustomAbortException("Read/Write incoherence"); }
                 }
 
                 for(Register lrst : locallyRead) {

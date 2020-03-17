@@ -23,7 +23,10 @@ public class Register<T> implements IRegister {
     }
 
     private Register makeCopy() {
-        Register copy = new Register(this.date, this.value); // shallow copy
+        // When value is not a primitive type, we should think about the copying mechanism
+        // We need a pointer on a new object
+        // Choice between shallow or deep copy can be handled by the object's implementation
+        Register copy = new Register(this.date, this.value);
         copy.lock = this.lock;
         return copy;
     }

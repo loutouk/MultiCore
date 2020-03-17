@@ -17,7 +17,7 @@ public class Test {
     private static final int INCREMENT_R1 = 1;
     private static final int INCREMENT_R2 = 10;
     private static final int THREAD_NB = 4;
-    private static final int COUNTER = 10;
+    private static final int COUNTER = 5;
 
     public static void main(String[] args) {
 

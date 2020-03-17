@@ -1,14 +1,16 @@
 package fr.univnantes.multicore.tp3;
 
-
 /**
  * See {@link Dictionary}
- * Because this class has been made immutable, should be thread safe when used with an optimistic locking technique
+ * Because this class has been made immutable, should be thread safe when used with an appropriate technique
+ * Examples include optimistic lock (ExploreTaskLockFree) and TL2 (ExploreTaskTL2)
  *
  * @author Matthieu Perrin, Louis Boursier
  *
  */
-public class DictionaryImmutable implements Cloneable{
+public class DictionaryImmutable implements Cloneable {
+
+    // TODO replace clone by Copy Constructors or Static Factory Methods
 
     // We start with a first node, to simplify the algorithm, that encodes the smallest non-empty string "\0".
     private Node start = new Node('\0', null);

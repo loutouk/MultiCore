@@ -24,14 +24,8 @@ public class ExploreTask implements Runnable {
     @Override
     public void run() {
         try {
-            /*
-             *  Check that the page was not already explored and adds it
-             *  Get and set operations should be atomic to not store duplicates
-             *  Use ConcurrentSkipListSet data structure
-             *  Also add operation can fail if a string is already present because of concurrency
-             *  WebGrep.explored.add operation is atomic
-             */
-            if (!WebGrep.explored.contains(address) && WebGrep.explored.add(address)) {
+            // Adds the specified element to this set if it is not already present (thread safe)
+            if (WebGrep.explored.add(address)) {
                 // Parse the page to find matches and hypertext links
                 ParsedPage page = Tools.parsePage(address);
                 if (!page.matches().isEmpty()) {
