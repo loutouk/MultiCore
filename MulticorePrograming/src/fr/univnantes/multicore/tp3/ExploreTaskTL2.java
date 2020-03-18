@@ -20,7 +20,8 @@ public class ExploreTaskTL2 implements Runnable {
      *
      * @param address the address to parse
      */
-    public ExploreTaskTL2(String address, Register register) {
+    public
+    ExploreTaskTL2(String address, Register register) {
         this.address = address;
         this.register = register;
     }

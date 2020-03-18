@@ -44,11 +44,13 @@ public class Register<T> implements IRegister {
     @Override
     public Object read(Transaction transaction) throws CustomAbortException {
         // if the register has been written by the same transaction, we return its value
-        if(transaction.getLocalCopies().get(this) != null && lastTransactionWriter ==transaction){
+        if(transaction.getLocalCopies().get(this) != null && lastTransactionWriter==transaction){
             return transaction.getLocalCopies().get(this).value;
         } else {
             transaction.getLocalCopies().put(this, this.makeCopy());
             transaction.getLocallyRead().add(this);
+            // transaction has possibly read other values that are no longer consistent
+            // with the value of register just obtained, in that case we abort
             if(transaction.getLocalCopies().get(this).date > transaction.getBirthdate()){ throw new CustomAbortException("Date incoherence"); }
             else{ return transaction.getLocalCopies().get(this).value; }
         }

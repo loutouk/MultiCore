@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -25,21 +26,22 @@ public class Transaction implements ITransaction{
         locallyWritten.clear();
         locallyRead.clear();
         localCopies.clear();
-        birthdate = Test.globalClock.get();
+        birthdate = EventuallyCommittedTest.globalClock.get();
     }
 
     @Override
     public void tryToCommit() throws CustomAbortException {
 
-        final String[] algorithms = {"simple", "optimized"};
+        final String[] algorithms = {"simple"};
         final int algorithmIndex = 0;
 
         switch (algorithms[algorithmIndex]){
             case "simple":
-                simpleTryToCommit();
-                break;
-            case "optimized":
-                optimizedTryToCommit();
+                try {
+                    simpleTryToCommit();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 throw new CustomAbortException("Commit algorithm " + algorithmIndex + " not implemented.");
@@ -47,92 +49,50 @@ public class Transaction implements ITransaction{
     }
 
     /**
-     * Optimized version - does not work! Yet
-     * if at the beginning, all the locks cannot be immediately obtained,
-     * TL2 can abort the transaction (and restart it later). This can allow for more efficient behaviors.
-     * @throws CustomAbortException
-     */
-    private void optimizedTryToCommit() throws CustomAbortException {
-        lock.lock();
-        try{
-            for(Register lwst : locallyWritten){ lwst.getLock().lock(); }
-
-            try {
-
-                for(Register lrst : locallyRead){
-                    // if locallyRead register is locked it means either two things:
-                    // 1 - it has been written on elsewhere, and locked just above because tryToCommit() was called
-                    // 2 - it has been locked just above because the same register is in locallyWritten & locallyRead
-                    //    this is because the register has been read when its local register copy was null
-                    //    so it was added to our locallyRead register list
-                    //    AND the same register has also been added to the locallyWritten register list
-                    //    happens when same register is read and written in the same transaction
-                    //    following exception will be raised
-                    // TODO isLocked() is outdated once called: is it a problem? I do not think so...
-                    if(lrst.getLock().isLocked()) { throw   new CustomAbortException("Read/Write incoherence"); }
-                }
-
-                for(Register lrst : locallyRead) {
-                    // if locallyRead date is more recent than our register, it means it has been updated elsewhere (dirty read)
-                    if(lrst.getDate() > birthdate) { throw new CustomAbortException("Date incoherence"); }
-                }
-
-                Integer commitDate = Test.globalClock.incrementAndGet();
-
-                for(Register register : locallyWritten){
-                    register.setValue(localCopies.get(register).getValue());
-                    register.setDate(commitDate);
-                }
-
-                isCommited = true;
-
-            }finally {
-                for(Register lwst : locallyWritten){ lwst.getLock().unlock(); }
-            }
-        }finally {
-            lock.unlock();
-        }
-    }
-
-    /**
      * Simplified version of TL2 commit function
      * @throws CustomAbortException
      */
-    private void simpleTryToCommit() throws CustomAbortException{
-        lock.lock();
-        try {
+    private void simpleTryToCommit() throws CustomAbortException, InterruptedException {
+        // lock on this function should be useless because a transaction should be used locally and not between threads
 
+        // at the beginning; if all the locks cannot be immediately obtained, TL2 should abort the transaction
+        // this should prevent from deadlocks
+        for (Register lwst : locallyWritten) {
+            // if this lock has been set to use a fair ordering policy then an available lock will not be acquired
+            // if any other threads are waiting for the lock (contrary to tryLock() without parameters) see doc
+            // this should prevent starvation, as the lock constructor has been set to the fair policy
+            if(!lwst.getLock().tryLock(0, TimeUnit.SECONDS)){ return; }
+        }
+        for (Register lrst : locallyRead) {
+            // same as before
+            if(!lrst.getLock().tryLock(0, TimeUnit.SECONDS)){ return; }
+        }
+
+        try {
+            for (Register lrst : locallyRead) {
+                // checks if the current values of the objects register it has read are still mutually consistent,
+                // and consistent with respect to the new values it has (locally) written
+                // if one of these dates is greater than its birthdate,
+                // there is a possible inconsistency and consequently transaction is aborted
+                if (lrst.getDate() > birthdate) {
+                    throw new CustomAbortException("Date incoherence");
+                }
+            }
+            Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+            for (Register register : locallyWritten) {
+                register.setValue(localCopies.get(register).getValue());
+                register.setDate(commitDate);
+            }
+            isCommited = true;
+
+        } finally {
+            // in case of an abortion, we must verify that we obtained the lock if we want to unlock it
             for (Register lwst : locallyWritten) {
-                lwst.getLock().lock();
+                if(lwst.getLock().isHeldByCurrentThread()){lwst.getLock().unlock();}
             }
             for (Register lrst : locallyRead) {
-                lrst.getLock().lock();
+                if(lrst.getLock().isHeldByCurrentThread()){lrst.getLock().unlock();}
             }
-
-            try {
-                for (Register lrst : locallyRead) {
-                    // if locallyRead date is more recent than our register, it means it has been updated elsewhere (dirty read)
-                    if (lrst.getDate() > birthdate) {
-                        throw new CustomAbortException("Date incoherence");
-                    }
-                }
-                Integer commitDate = Test.globalClock.incrementAndGet();
-                for (Register register : locallyWritten) {
-                    register.setValue(localCopies.get(register).getValue());
-                    register.setDate(commitDate);
-                }
-                isCommited = true;
-
-            } finally {
-                for (Register lwst : locallyWritten) {
-                    lwst.getLock().unlock();
-                }
-                for (Register lrst : locallyRead) {
-                    lrst.getLock().unlock();
-                }
-            }
-        }finally {
-            lock.unlock();
         }
     }
 

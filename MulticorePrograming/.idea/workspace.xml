@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1002e77-e8fe-4b52-9ab2-c9e40cbca3ad" name="Default Changelist" comment="TL2 implemented with dictionary">
-      <change afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/DictionaryImmutable$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/DictionaryImmutable$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/DictionaryImmutable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/DictionaryImmutable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/ExploreTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/ExploreTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -28,22 +22,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+            <state relative-caret-position="224">
+              <caret line="54" column="72" selection-start-line="54" selection-start-column="72" selection-end-line="54" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
               <folding>
-                <element signature="e#2552#2553#0" expanded="true" />
-                <element signature="e#2579#2580#0" expanded="true" />
-                <element signature="e#2616#2617#0" expanded="true" />
-                <element signature="e#2648#2649#0" expanded="true" />
-                <element signature="e#2675#2676#0" expanded="true" />
-                <element signature="e#2703#2704#0" expanded="true" />
-                <element signature="e#2740#2741#0" expanded="true" />
-                <element signature="e#2774#2775#0" expanded="true" />
-                <element signature="e#2812#2813#0" expanded="true" />
-                <element signature="e#2839#2840#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,67 +46,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="115" column="30" selection-start-line="115" selection-start-column="30" selection-end-line="115" selection-end-column="30" />
+            <state relative-caret-position="235">
+              <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5712#5713#0" expanded="true" />
-                <element signature="e#5746#5747#0" expanded="true" />
+                <element signature="e#4408#4409#0" expanded="true" />
+                <element signature="e#4441#4442#0" expanded="true" />
+                <element signature="e#4490#4491#0" expanded="true" />
+                <element signature="e#4527#4528#0" expanded="true" />
+                <element signature="e#4573#4574#0" expanded="true" />
+                <element signature="e#4607#4608#0" expanded="true" />
+                <element signature="e#4640#4641#0" expanded="true" />
+                <element signature="e#4672#4673#0" expanded="true" />
+                <element signature="e#4727#4728#0" expanded="true" />
+                <element signature="e#4761#4762#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="14" column="79" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="79" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1221">
-              <caret line="75" column="12" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomAbortException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" selection-start-line="2" selection-end-line="5" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -129,36 +77,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>date</find>
-      <find>setDa</find>
-      <find>getLocalCopy</find>
-      <find>lastTransactionWritter</find>
-      <find>LocallyR</find>
-      <find>ister v</find>
-      <find>thread re</find>
-      <find>System</find>
-      <find>Date</find>
-      <find>clone</find>
-      <find>add</find>
-      <find>Main</find>
-      <find>dictionary</find>
-      <find>dictionaryPointer</find>
-      <find>https://fr.wikipedia.org/wiki/Nantes:</find>
-      <find>https://fr.wikipedia.org/wiki/Anne_de_Bretagne: 7</find>
-      <find>https://fr.wikipedia.org/wiki/Les_Machines_de_l%27%C3%AEle: 9</find>
-      <find>https://fr.wikipedia.org/wiki/Quai_Ernest-Renaud: 5</find>
-      <find>https://fr.wikipedia.org/wiki/Loire-Atlantique: 14</find>
-      <find>dictionaryImmutable</find>
-      <find>https://fr.wikipedia.org/wiki/Canton_de_Nantes-5: 9</find>
-      <find>https://fr.wikipedia.org/wiki/Nantes: 225</find>
-      <find>https://fr.wikipedia.org/wiki/Nantes_(homonymie): 2</find>
-      <find>https://fr.wikipedia.org/wiki/%C3%8Ele_de_Nantes: 17</find>
-      <find>https://fr.wikipedia.org/wiki/Fichier:Nantes_-_Erdre.jpg: 1</find>
-      <find>https://fr.wikipedia.org/wiki/Pays_de_la_Loire: 13</find>
       <find>https://fr.wikipedia.org/wiki/Loire: 9</find>
       <find>https://fr.wikipedia.org/wiki/Estuaire_de_la_Loire: 16</find>
       <find>https://fr.wikipedia.org/wiki/Liste_des_lignes_de_bus_de_Nantes: 3</find>
       <find>https://fr.wikipedia.org/wiki/Quimper: 5</find>
+      <find>https://fr.wikipedia.org/wiki/Canton_de_Nantes-5: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Intercommunalit%C3%A9_en_France: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Angers_Loire_M%C3%A9tropole: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Bretagne: 16</find>
+      <find>https://fr.wikipedia.org/wiki/Rez%C3%A9: 60</find>
+      <find>https://fr.wikipedia.org/wiki/Gare_de_Nantes: 22</find>
+      <find>https://fr.wikipedia.org/wiki/Civitas: 1</find>
+      <find>http://www.nantesmetropole.fr/decouverte/les-projets-phares/: 24</find>
+      <find>https://da.wikipedia.org/wiki/Nantes: 7</find>
+      <find>https://fr.wikipedia.org/wiki/Quai: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Rue_du_Ranzay: 4</find>
+      <find>https://fr.wikipedia.org/wiki/Alain_Bouchart: 1</find>
+      <find>https://fr.wikipedia.org/w/index.php?title=Le_Lieu_unique&amp;veaction=edit&amp;section=1: 9</find>
+      <find>https://fr.wikipedia.org/w/index.php?title=Tramway_de_Nantes&amp;veaction=edit&amp;section=27: 18</find>
+      <find>https://fr.wikipedia.org/w/index.php?title=Tramway_de_Nantes&amp;action=edit&amp;section=6: 1</find>
+      <find>https://fr.wikipedia.org/wiki/Fichier:Nantes_-_Villa_Chantrerie_01.jpg: 2</find>
+      <find>https://tr.wikipedia.org/wiki/Nantes: 9</find>
+      <find>https://vo.wikipedia.org/wiki/Nantes: 6</find>
+      <find>https://fr.wikipedia.org/wiki/Brissonneau_et_Lotz: 1</find>
+      <find>https://en.wikipedia.org/wiki/Nantes_tramway: 22</find>
+      <find>https://fr.wikipedia.org/wiki/Costume_breton: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Maison_cap%C3%A9tienne_de_Bourbon: 3</find>
+      <find>https://worldcat.org/oclc/294283619&amp;lang=fr: 2</find>
+      <find>https://fr.wikipedia.org/wiki/Dinan: 1</find>
+      <find>Monito</find>
+      <find>globalClock</find>
     </findStrings>
     <replaceStrings>
       <replace>Test</replace>
@@ -197,16 +145,18 @@
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Main.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryWaitFree.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Dictionary.java" />
-        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/AbstractCopier.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/ICopier.java" />
-        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java" />
-        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/IntegerRegister.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/RegisterDeadlockTest.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java" />
       </list>
     </option>
   </component>
@@ -288,9 +238,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.WebGrep">
-    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.projet.Main" />
+  <component name="RunManager">
+    <configuration name="EventuallyCommittedTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.projet.EventuallyCommittedTest" />
       <module name="MulticorePrograming" />
       <extension name="coverage">
         <pattern>
@@ -302,8 +252,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.projet.Test" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.univnantes.multicore.projet.Main" />
       <module name="MulticorePrograming" />
       <extension name="coverage">
         <pattern>
@@ -356,8 +306,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EventuallyCommittedTest" />
         <item itemvalue="Application.WebGrep" />
-        <item itemvalue="Application.Test (1)" />
         <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.Tmp" />
@@ -389,14 +339,21 @@
       <option name="project" value="LOCAL" />
       <updated>1584383902393</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="TL2 implemented with dictionary">
+      <created>1584460783801</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584460783801</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2322239" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20726173" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -405,7 +362,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3840246" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33947772" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -415,7 +372,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Anonymous Apex" order="10" />
       <window_info anchor="bottom" id="Log Analyzer" order="11" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.32872504" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32872504" />
       <window_info anchor="bottom" id="SOQL Query" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -433,7 +390,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="memoire transactionelle: TL2 algorithm" />
     <MESSAGE value="TL2 effectively tested" />
-    <option name="LAST_COMMIT_MESSAGE" value="TL2 effectively tested" />
+    <MESSAGE value="TL2 implemented with dictionary" />
+    <option name="LAST_COMMIT_MESSAGE" value="TL2 implemented with dictionary" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/examples/universal/Example.java">
@@ -649,24 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding>
-            <element signature="e#285#286#0" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskLockFree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="37" column="95" lean-forward="true" selection-start-line="37" selection-start-column="95" selection-end-line="37" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/Dictionary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -674,35 +614,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/AbstractCopier.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/AbstractCopier.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/ICopier.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/IntegerRegister.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="46" lean-forward="true" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/ICopier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+        <state relative-caret-position="1350">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
           <folding>
-            <element signature="e#2552#2553#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2616#2617#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-            <element signature="e#2675#2676#0" expanded="true" />
-            <element signature="e#2703#2704#0" expanded="true" />
-            <element signature="e#2740#2741#0" expanded="true" />
-            <element signature="e#2774#2775#0" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -714,67 +634,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/IntegerRegister.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/RegisterDeadlockTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#154#155#0" expanded="true" />
-            <element signature="e#188#189#0" expanded="true" />
-            <element signature="e#131#132#0" expanded="true" />
-            <element signature="e#158#159#0" expanded="true" />
-            <element signature="e#204#205#0" expanded="true" />
-            <element signature="e#231#232#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1221">
-          <caret line="75" column="12" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
+        <state relative-caret-position="252">
+          <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskLockFree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="14" column="79" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="79" />
+        <state relative-caret-position="216">
+          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding>
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/DictionaryImmutable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+        <state relative-caret-position="346">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="115" column="30" selection-start-line="115" selection-start-column="30" selection-end-line="115" selection-end-column="30" />
+        <state relative-caret-position="235">
+          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5712#5713#0" expanded="true" />
-            <element signature="e#5746#5747#0" expanded="true" />
+            <element signature="e#4408#4409#0" expanded="true" />
+            <element signature="e#4441#4442#0" expanded="true" />
+            <element signature="e#4490#4491#0" expanded="true" />
+            <element signature="e#4527#4528#0" expanded="true" />
+            <element signature="e#4573#4574#0" expanded="true" />
+            <element signature="e#4607#4608#0" expanded="true" />
+            <element signature="e#4640#4641#0" expanded="true" />
+            <element signature="e#4672#4673#0" expanded="true" />
+            <element signature="e#4727#4728#0" expanded="true" />
+            <element signature="e#4761#4762#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        <state relative-caret-position="119">
+          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="54" column="72" selection-start-line="54" selection-start-column="72" selection-end-line="54" selection-end-column="72" />
         </state>
       </provider>
     </entry>
