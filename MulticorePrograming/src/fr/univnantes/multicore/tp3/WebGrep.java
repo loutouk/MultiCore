@@ -20,7 +20,6 @@ public class WebGrep {
 
     // TODO: wrap all producer consumer related objects in a class and feed it to their constructor
 
-
     static ExecutorService threadPool;
 
     // for producer consumer pattern used for printing webpages
@@ -65,12 +64,11 @@ public class WebGrep {
             thread.start(); // runs a thread for printing parsed pages
         }
 
-        // for lock free version of th task
+        // for lock free version of the task
         // dictionaryPointer.set(immutableDictionary);
 
         // Get the starting URL given in argument
         for (String address : Tools.startingURL()) {
-            //ExploreTask newTask = new ExploreTask(address);
             //ExploreTaskLockFree newTask = new ExploreTaskLockFree(address);
             //ExploreTask newTask = new ExploreTask(address);
             ExploreTaskTL2 newTask = new ExploreTaskTL2(address, register);

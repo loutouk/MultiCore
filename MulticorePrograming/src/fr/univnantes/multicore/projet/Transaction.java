@@ -2,20 +2,18 @@ package fr.univnantes.multicore.projet;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Louis boursier
  * Date: 15/03/2020
  */
-public class Transaction implements ITransaction{
+public class Transaction implements ITransaction {
 
     private List<Register> locallyWritten = new LinkedList<>(); // all written registers (called lwst in material)
     private List<Register> locallyRead = new LinkedList<>(); // all read registers (called lrst in material)
     private Map<Register, Register> localCopies = new HashMap<>(); // maps a register to its local copy with new value
     private int birthdate; // date of the global shared clock counter at the beginning of the transaction
     private boolean isCommited = false;
-    private ReentrantLock lock = new ReentrantLock(true);
 
     @Override
     public void begin() {
@@ -32,7 +30,7 @@ public class Transaction implements ITransaction{
         final String[] algorithms = {"tryLockLocking", "orderedLocking", "arbitratorLocking"};
         final int algorithmIndex = 2;
 
-        switch (algorithms[algorithmIndex]){
+        switch (algorithms[algorithmIndex]) {
             case "tryToLock":
                 try {
                     tryLockLocking();
@@ -57,23 +55,18 @@ public class Transaction implements ITransaction{
 
     /**
      * delegates the concurrency problem to a single point that deals with deadlocks and fairness
+     *
      * @throws CustomAbortException
      */
     private void arbitratorLocking() throws CustomAbortException, InterruptedException {
-        while(!Arbitrator.askForLocks(locallyWritten, locallyRead)){
-            // TODO: change busy wait for wait and signal
-            try{
-                Thread.sleep(Math.abs(new Random().nextInt()%500));
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+        while (!Arbitrator.askForLocks(locallyWritten, locallyRead)) {
         }
-        try{
+        try {
             for (Register lrst : locallyRead) {
-                // checks if the current values of the objects register it has read are still mutually consistent,
-                // and consistent with respect to the new values it has (locally) written
-                // if one of these dates is greater than its birthdate,
-                // there is a possible inconsistency and consequently transaction is aborted
+                /* checks if the current values of the objects register it has read are still mutually consistent,
+                   and consistent with respect to the new values it has (locally) written
+                   if one of these dates is greater than its birthdate,
+                   there is a possible inconsistency and consequently transaction is aborted */
                 if (lrst.getDate() > birthdate) {
                     throw new CustomAbortException("Date incoherence");
                 }
@@ -84,7 +77,7 @@ public class Transaction implements ITransaction{
                 register.setDate(commitDate);
             }
             isCommited = true;
-        }finally {
+        } finally {
             Arbitrator.releaseLocks(locallyWritten, locallyRead);
         }
     }
@@ -98,17 +91,21 @@ public class Transaction implements ITransaction{
     private void orderedLocking() throws CustomAbortException {
         // order registers by their number
         Collections.sort(locallyWritten, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
-        for (Register lwst : locallyWritten) {lwst.getLock().lock();} // asks for a lock
+        for (Register lwst : locallyWritten) {
+            lwst.getLock().lock();
+        } // asks for a lock
 
         Collections.sort(locallyRead, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
-        for (Register lrst : locallyRead) {lrst.getLock().lock();} // asks for a lock
+        for (Register lrst : locallyRead) {
+            lrst.getLock().lock();
+        } // asks for a lock
 
         try {
             for (Register lrst : locallyRead) {
-                // checks if the current values of the objects register it has read are still mutually consistent,
-                // and consistent with respect to the new values it has (locally) written
-                // if one of these dates is greater than its birthdate,
-                // there is a possible inconsistency and consequently transaction is aborted
+                /* checks if the current values of the objects register it has read are still mutually consistent,
+                   and consistent with respect to the new values it has (locally) written
+                   if one of these dates is greater than its birthdate,
+                   there is a possible inconsistency and consequently transaction is aborted */
                 if (lrst.getDate() > birthdate) {
                     throw new CustomAbortException("Date incoherence");
                 }
@@ -120,8 +117,12 @@ public class Transaction implements ITransaction{
             }
             isCommited = true;
         } finally {
-            for (Register lwst : locallyWritten) { lwst.getLock().unlock();}
-            for (Register lrst : locallyRead) { lrst.getLock().unlock();}
+            for (Register lwst : locallyWritten) {
+                lwst.getLock().unlock();
+            }
+            for (Register lrst : locallyRead) {
+                lrst.getLock().unlock();
+            }
         }
     }
 
@@ -130,6 +131,7 @@ public class Transaction implements ITransaction{
      * at the beginning; if all the locks cannot be immediately obtained, TL2 should abort the transaction
      * this should prevent from deadlocks, but not from starvation
      * this solution can also never reach a commit (constantly aborted)
+     *
      * @throws CustomAbortException
      */
     private void tryLockLocking() throws CustomAbortException, InterruptedException {
@@ -138,19 +140,23 @@ public class Transaction implements ITransaction{
             // if this lock has been set to use a fair ordering policy then an available lock will not be acquired
             // if any other threads are waiting for the lock (contrary to tryLock() without parameters) see doc
             // this should prevent starvation, as the lock constructor has been set to the fair policy
-            if(!lwst.getLock().tryLock(0, TimeUnit.SECONDS)){ return; }
+            if (!lwst.getLock().tryLock(0, TimeUnit.SECONDS)) {
+                return;
+            }
         }
         for (Register lrst : locallyRead) {
             // same as before
-            if(!lrst.getLock().tryLock(0, TimeUnit.SECONDS)){ return; }
+            if (!lrst.getLock().tryLock(0, TimeUnit.SECONDS)) {
+                return;
+            }
         }
 
         try {
             for (Register lrst : locallyRead) {
-                // checks if the current values of the objects register it has read are still mutually consistent,
-                // and consistent with respect to the new values it has (locally) written
-                // if one of these dates is greater than its birthdate,
-                // there is a possible inconsistency and consequently transaction is aborted
+                /* checks if the current values of the objects register it has read are still mutually consistent,
+                   and consistent with respect to the new values it has (locally) written
+                   if one of these dates is greater than its birthdate,
+                   there is a possible inconsistency and consequently transaction is aborted */
                 if (lrst.getDate() > birthdate) {
                     throw new CustomAbortException("Date incoherence");
                 }
@@ -165,10 +171,14 @@ public class Transaction implements ITransaction{
         } finally {
             // in case of an abortion, we must verify that we obtained the lock if we want to unlock it
             for (Register lwst : locallyWritten) {
-                if(lwst.getLock().isHeldByCurrentThread()){lwst.getLock().unlock();}
+                if (lwst.getLock().isHeldByCurrentThread()) {
+                    lwst.getLock().unlock();
+                }
             }
             for (Register lrst : locallyRead) {
-                if(lrst.getLock().isHeldByCurrentThread()){lrst.getLock().unlock();}
+                if (lrst.getLock().isHeldByCurrentThread()) {
+                    lrst.getLock().unlock();
+                }
             }
         }
     }

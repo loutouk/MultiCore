@@ -1,7 +1,9 @@
 package fr.univnantes.multicore.projet;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Louis boursier
@@ -12,24 +14,27 @@ import java.util.List;
  * The fairness is decided within this class
  */
 public class Arbitrator {
-    private static HashSet<Register> lockedRegisters = new HashSet<>();
-    //private static CustomLock lock = new BasicLock(); // not fair
-    private static CustomLock lock = new FairLock(); // fair
+
+    private static Set<Register> lockedRegisters = new CopyOnWriteArraySet<>();
+    private static ReentrantLock reentrantLock = new ReentrantLock(true);
 
     public static boolean askForLocks(List<Register> locallyWritten, List<Register> locallyRead) throws InterruptedException {
-        Arbitrator.lock.lock();
-        for(Register r : locallyWritten){ if(lockedRegisters.contains(r)) return false; }
-        for(Register r : locallyRead){ if(lockedRegisters.contains(r)) return false; }
+        Arbitrator.reentrantLock.lock();
+        for (Register r : locallyWritten) {
+            if (lockedRegisters.contains(r)) return false;
+        }
+        for (Register r : locallyRead) {
+            if (lockedRegisters.contains(r)) return false;
+        }
         lockedRegisters.addAll(locallyWritten);
         lockedRegisters.addAll(locallyRead);
-        Arbitrator.lock.unlock();
+        Arbitrator.reentrantLock.unlock();
         return true;
     }
 
-    public static void releaseLocks(List<Register> locallyWritten, List<Register> locallyRead) throws InterruptedException {
-        Arbitrator.lock.lock();
+    public static void releaseLocks(List<Register> locallyWritten, List<Register> locallyRead) {
+        // if the set is thread safe, no lock needed for releasing the registers
         lockedRegisters.removeAll(locallyWritten);
-        lockedRegisters.retainAll(locallyRead);
-        Arbitrator.lock.unlock();
+        lockedRegisters.removeAll(locallyRead);
     }
 }
