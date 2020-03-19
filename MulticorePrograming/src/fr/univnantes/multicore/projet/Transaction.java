@@ -1,9 +1,6 @@
 package fr.univnantes.multicore.projet;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -32,13 +29,23 @@ public class Transaction implements ITransaction{
     @Override
     public void tryToCommit() throws CustomAbortException {
 
-        final String[] algorithms = {"simple"};
-        final int algorithmIndex = 0;
+        final String[] algorithms = {"tryLockLocking", "orderedLocking", "arbitratorLocking"};
+        final int algorithmIndex = 2;
 
         switch (algorithms[algorithmIndex]){
-            case "simple":
+            case "tryToLock":
                 try {
-                    simpleTryToCommit();
+                    tryLockLocking();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "orderedLocking":
+                orderedLocking();
+                break;
+            case "arbitratorLocking":
+                try {
+                    arbitratorLocking();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -49,14 +56,84 @@ public class Transaction implements ITransaction{
     }
 
     /**
-     * Simplified version of TL2 commit function
+     * delegates the concurrency problem to a single point that deals with deadlocks and fairness
      * @throws CustomAbortException
      */
-    private void simpleTryToCommit() throws CustomAbortException, InterruptedException {
-        // lock on this function should be useless because a transaction should be used locally and not between threads
+    private void arbitratorLocking() throws CustomAbortException, InterruptedException {
+        while(!Arbitrator.askForLocks(locallyWritten, locallyRead)){
+            // TODO: change busy wait for wait and signal
+            try{
+                Thread.sleep(Math.abs(new Random().nextInt()%500));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        try{
+            for (Register lrst : locallyRead) {
+                // checks if the current values of the objects register it has read are still mutually consistent,
+                // and consistent with respect to the new values it has (locally) written
+                // if one of these dates is greater than its birthdate,
+                // there is a possible inconsistency and consequently transaction is aborted
+                if (lrst.getDate() > birthdate) {
+                    throw new CustomAbortException("Date incoherence");
+                }
+            }
+            Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+            for (Register register : locallyWritten) {
+                register.setValue(localCopies.get(register).getValue());
+                register.setDate(commitDate);
+            }
+            isCommited = true;
+        }finally {
+            Arbitrator.releaseLocks(locallyWritten, locallyRead);
+        }
+    }
 
-        // at the beginning; if all the locks cannot be immediately obtained, TL2 should abort the transaction
-        // this should prevent from deadlocks
+    /**
+     * As for the dining philosopher problems, we label each shared resources with a number
+     * And thread can only ask for those shared resources (registers) in order
+     * this should prevent from deadlocks, but not from starvation in itself
+     * however, with the fairness parameter given to the ReentrantLock constructor, it should not starve
+     */
+    private void orderedLocking() throws CustomAbortException {
+        // order registers by their number
+        Collections.sort(locallyWritten, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
+        for (Register lwst : locallyWritten) {lwst.getLock().lock();} // asks for a lock
+
+        Collections.sort(locallyRead, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
+        for (Register lrst : locallyRead) {lrst.getLock().lock();} // asks for a lock
+
+        try {
+            for (Register lrst : locallyRead) {
+                // checks if the current values of the objects register it has read are still mutually consistent,
+                // and consistent with respect to the new values it has (locally) written
+                // if one of these dates is greater than its birthdate,
+                // there is a possible inconsistency and consequently transaction is aborted
+                if (lrst.getDate() > birthdate) {
+                    throw new CustomAbortException("Date incoherence");
+                }
+            }
+            Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+            for (Register register : locallyWritten) {
+                register.setValue(localCopies.get(register).getValue());
+                register.setDate(commitDate);
+            }
+            isCommited = true;
+        } finally {
+            for (Register lwst : locallyWritten) { lwst.getLock().unlock();}
+            for (Register lrst : locallyRead) { lrst.getLock().unlock();}
+        }
+    }
+
+    /**
+     * Simplified version of TL2 commit function
+     * at the beginning; if all the locks cannot be immediately obtained, TL2 should abort the transaction
+     * this should prevent from deadlocks, but not from starvation
+     * this solution can also never reach a commit (constantly aborted)
+     * @throws CustomAbortException
+     */
+    private void tryLockLocking() throws CustomAbortException, InterruptedException {
+        // lock on this function should be useless because a transaction should be used locally and not between threads
         for (Register lwst : locallyWritten) {
             // if this lock has been set to use a fair ordering policy then an available lock will not be acquired
             // if any other threads are waiting for the lock (contrary to tryLock() without parameters) see doc

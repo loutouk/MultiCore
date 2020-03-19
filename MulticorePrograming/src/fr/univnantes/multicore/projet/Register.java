@@ -10,12 +10,16 @@ public class Register<T> implements IRegister {
 
     // shared values between thread should either be declared final or volatile
     // even though ReentrantLock implements Lock that ensures the updates to memory is seen by other threads (doc)
+
+    private static int sharedRegisterCounter = 0; // used for solving concurrency problem on this shared register
+    private int registerNumber; // each register has its counter and transactions can only ask for a register's lock in order
     private volatile int date; // date for which the last transaction was committed in this register
     private volatile T value; // last value
     private ReentrantLock lock; // lock used during the commit function of the transaction (volatile by default)
     private volatile Transaction lastTransactionWriter; // reference to the last transaction that wrote to our value
 
     public Register(int date, T value) {
+        this.registerNumber = Register.sharedRegisterCounter++;
         this.date = date;
         this.value = value;
         this.lastTransactionWriter = null;
@@ -74,5 +78,9 @@ public class Register<T> implements IRegister {
 
     public ReentrantLock getLock() {
         return lock;
+    }
+
+    public int getRegisterNumber() {
+        return registerNumber;
     }
 }
