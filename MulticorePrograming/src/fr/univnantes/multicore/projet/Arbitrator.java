@@ -18,23 +18,19 @@ public class Arbitrator {
     private static Set<Register> lockedRegisters = new CopyOnWriteArraySet<>();
     private static ReentrantLock reentrantLock = new ReentrantLock(true);
 
-    public static boolean askForLocks(List<Register> locallyWritten, List<Register> locallyRead) throws InterruptedException {
+    public static boolean askForLocks(List<Register> registers) {
         Arbitrator.reentrantLock.lock();
-        for (Register r : locallyWritten) {
-            if (lockedRegisters.contains(r)) return false;
+        try {
+            for (Register r : registers) { if (lockedRegisters.contains(r)) return false; }
+            lockedRegisters.addAll(registers);
+        }finally {
+            Arbitrator.reentrantLock.unlock();
         }
-        for (Register r : locallyRead) {
-            if (lockedRegisters.contains(r)) return false;
-        }
-        lockedRegisters.addAll(locallyWritten);
-        lockedRegisters.addAll(locallyRead);
-        Arbitrator.reentrantLock.unlock();
         return true;
     }
 
-    public static void releaseLocks(List<Register> locallyWritten, List<Register> locallyRead) {
+    public static void releaseLocks(List<Register> registers) {
         // if the set is thread safe, no lock needed for releasing the registers
-        lockedRegisters.removeAll(locallyWritten);
-        lockedRegisters.removeAll(locallyRead);
+        lockedRegisters.removeAll(registers);
     }
 }

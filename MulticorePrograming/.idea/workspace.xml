@@ -3,18 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a1002e77-e8fe-4b52-9ab2-c9e40cbca3ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/fr/univnantes/multicore/tp3/WebGrep.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Arbitrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Arbitrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/BasicLock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomAbortException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomAbortException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomLock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/EventuallyCommittedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/FairLock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/IRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/IRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/ITransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/ITransaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/QueueObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -32,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="1134">
               <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -44,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-294">
+            <state relative-caret-position="342">
               <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -56,16 +47,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-216">
-              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+            <state relative-caret-position="198">
+              <caret line="86" column="44" lean-forward="true" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2365#2721#0" />
-                <element signature="e#7972#7973#0" expanded="true" />
-                <element signature="e#8058#8059#0" expanded="true" />
-                <element signature="e#8138#8139#0" expanded="true" />
-                <element signature="e#8203#8204#0" expanded="true" />
+                <element signature="e#8126#8127#0" expanded="true" />
+                <element signature="e#8212#8213#0" expanded="true" />
                 <element signature="e#8292#8293#0" expanded="true" />
+                <element signature="e#8357#8358#0" expanded="true" />
+                <element signature="e#8446#8447#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Arbitrator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+            <state relative-caret-position="267">
+              <caret line="20" column="65" lean-forward="true" selection-start-line="20" selection-start-column="65" selection-end-line="20" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,10 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>https://fr.wikipedia.org/wiki/Rez%C3%A9: 60</find>
-      <find>https://fr.wikipedia.org/wiki/Gare_de_Nantes: 22</find>
-      <find>https://fr.wikipedia.org/wiki/Civitas: 1</find>
-      <find>http://www.nantesmetropole.fr/decouverte/les-projets-phares/: 24</find>
       <find>https://da.wikipedia.org/wiki/Nantes: 7</find>
       <find>https://fr.wikipedia.org/wiki/Quai: 2</find>
       <find>https://fr.wikipedia.org/wiki/Rue_du_Ranzay: 4</find>
@@ -126,6 +112,10 @@
       <find>https://fr.wikipedia.org/wiki/Trignac: 1</find>
       <find>https://fr.wikipedia.org/wiki/Herbignac: 1</find>
       <find>https://fr.wikipedia.org/wiki/Suc%C3%A9-sur-Erdre: 8</find>
+      <find>https://sv.wikipedia.org/wiki/Anna_av_Bretagne: 3</find>
+      <find>Date i</find>
+      <find>https://fr.wikipedia.org/w/index.php?title=Loire&amp;veaction=edit&amp;section=20: 9</find>
+      <find>https://fr.wikipedia.org/wiki/Port_de_Nantes-Saint-Nazaire: 8</find>
     </findStrings>
     <replaceStrings>
       <replace>Test</replace>
@@ -179,8 +169,8 @@
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomLock.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/FairLock.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/QueueObject.java" />
-        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java" />
+        <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java" />
         <option value="$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Arbitrator.java" />
       </list>
     </option>
@@ -384,13 +374,21 @@
       <option name="project" value="LOCAL" />
       <updated>1584629809165</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix arbitrator">
+      <created>1584635154672</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584635154672</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21028744" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2193646" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -399,7 +397,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32565284" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.38863286" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -430,7 +428,8 @@
     <MESSAGE value="TL2 implemented with dictionary" />
     <MESSAGE value="solve deadlock in commit" />
     <MESSAGE value="add arbitrator and ordered resources algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="add arbitrator and ordered resources algorithm" />
+    <MESSAGE value="fix arbitrator" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix arbitrator" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp2/unisex/Person.java">
@@ -670,9 +669,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/s.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/s.java" />
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomAbortException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -700,31 +697,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomLock.java">
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/CustomLock.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/BasicLock.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/QueueObject.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/FairLock.java" />
+    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/BasicLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/QueueObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/FairLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="1134">
+          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -733,18 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/ExploreTaskTL2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-294">
+        <state relative-caret-position="342">
           <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/tp3/WebGrep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -753,24 +723,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        <state relative-caret-position="198">
+          <caret line="86" column="44" lean-forward="true" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2365#2721#0" />
-            <element signature="e#7972#7973#0" expanded="true" />
-            <element signature="e#8058#8059#0" expanded="true" />
-            <element signature="e#8138#8139#0" expanded="true" />
-            <element signature="e#8203#8204#0" expanded="true" />
+            <element signature="e#8126#8127#0" expanded="true" />
+            <element signature="e#8212#8213#0" expanded="true" />
             <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8357#8358#0" expanded="true" />
+            <element signature="e#8446#8447#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/univnantes/multicore/projet/Arbitrator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        <state relative-caret-position="267">
+          <caret line="20" column="65" lean-forward="true" selection-start-line="20" selection-start-column="65" selection-end-line="20" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

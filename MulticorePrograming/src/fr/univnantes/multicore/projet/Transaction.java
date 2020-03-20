@@ -42,11 +42,7 @@ public class Transaction implements ITransaction {
                 orderedLocking();
                 break;
             case "arbitratorLocking":
-                try {
-                    arbitratorLocking();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                arbitratorLocking();
                 break;
             default:
                 throw new CustomAbortException("Commit algorithm " + algorithmIndex + " not implemented.");
@@ -58,8 +54,8 @@ public class Transaction implements ITransaction {
      *
      * @throws CustomAbortException
      */
-    private void arbitratorLocking() throws CustomAbortException, InterruptedException {
-        while (!Arbitrator.askForLocks(locallyWritten, locallyRead)) {
+    private void arbitratorLocking() throws CustomAbortException {
+        while (!Arbitrator.askForLocks(makeUnionOfRegisters())) {
         }
         try {
             for (Register lrst : locallyRead) {
@@ -78,8 +74,19 @@ public class Transaction implements ITransaction {
             }
             isCommited = true;
         } finally {
-            Arbitrator.releaseLocks(locallyWritten, locallyRead);
+            Arbitrator.releaseLocks(makeUnionOfRegisters());
         }
+    }
+
+    /**
+     *
+     * @return a List of the combined locallyWritten and locallyRead registers
+     */
+    private List<Register> makeUnionOfRegisters(){
+        List allRegisters = new LinkedList();
+        allRegisters.addAll(locallyWritten);
+        allRegisters.addAll(locallyRead);
+        return allRegisters;
     }
 
     /**
