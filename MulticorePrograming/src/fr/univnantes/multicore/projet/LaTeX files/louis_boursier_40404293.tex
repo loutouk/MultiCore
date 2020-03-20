@@ -1,0 +1,270 @@
+% #######################################
+% ########### FILL THESE IN #############
+% #######################################
+\def\mytitle{Multicore Programming — Projet Mémoire transactionnelle logicielle}
+\def\myauthor{Filaudeau Eloi - Louis Boursier}
+\def\contact{eloi.filaudeau@etu.univ-nantes.fr - louis.boursier@etu.univ-nantes.fr}
+\def\mymodule{Programmation multi-coeurs (MP:X2I3010)}
+% #######################################
+% #### YOU DON'T NEED TO TOUCH BELOW ####
+% #######################################
+\documentclass[10pt, a4paper]{article}
+\usepackage[a4paper,outer=1.5cm,inner=1.5cm,top=1.75cm,bottom=1.5cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+%colour our links, remove weird boxes
+\usepackage[colorlinks,linkcolor={black},citecolor={blue!80!black},urlcolor={blue!80!black}]{hyperref}
+%Stop indentation on new paragraphs
+\usepackage[parfill]{parskip}
+%% Arial-like font
+\IfFileExists{uarial.sty}
+{
+    \usepackage[english]{babel}
+    \usepackage[T1]{fontenc}
+    \usepackage{uarial}
+    \renewcommand{\familydefault}{\sfdefault}
+}{
+    \GenericError{}{Couldn't find Arial font}{ you may need to install 'nonfree' fonts on your system}{}
+    \usepackage{lmodern}
+    \renewcommand*\familydefault{\sfdefault}
+}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{listings}
+%give us the Capital H that we all know and love
+\usepackage{float}
+%tone down the line spacing after section titles
+\usepackage{titlesec}
+%Cool maths printing
+\usepackage{amsmath}
+%PseudoCode
+\usepackage{algorithm2e}
+
+\titlespacing{\subsection}{0pt}{\parskip}{-3pt}
+\titlespacing{\subsubsection}{0pt}{\parskip}{-\parskip}
+\titlespacing{\paragraph}{0pt}{\parskip}{\parskip}
+\newcommand{\figuremacro}[5]{
+    \begin{figure}[#1]
+        \centering
+        \includegraphics[width=#5\columnwidth]{#2}
+        \caption[#3]{\textbf{#3}#4}
+        \label{fig:#2}
+    \end{figure}
+}
+
+\lstset{
+	escapeinside={/*@}{@*/}, language=Java,
+	basicstyle=\fontsize{8.5}{12}\selectfont,
+	numbers=left,numbersep=2pt,xleftmargin=2pt,frame=tb,
+    columns=fullflexible,showstringspaces=false,tabsize=4,
+    keepspaces=true,showtabs=false,showspaces=false,
+    backgroundcolor=\color{white}, morekeywords={inline,public,
+    class,private,protected,struct},captionpos=t,lineskip=-0.4em,
+	aboveskip=10pt, extendedchars=true, breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
+
+\title{\mytitle}
+\author{\myauthor\hspace{1em}\\\contact\\Université de Nantes\hspace{0.5em}-\hspace{0.5em}\mymodule}
+\date{}
+\hypersetup{pdfauthor=\myauthor,pdftitle=\mytitle}
+\sloppy
+% #######################################
+% ########### START FROM HERE ###########
+% #######################################
+\begin{document}
+    \maketitle
+    \begin{abstract}
+	Ce document est un rapport du projet de mémoire transactionelle logicielle du module de programmation multi-coeurs. On discutera en particulier de la propriété de vivacité sur les transactions garantie par l’algorithme TL2.
+    \end{abstract}
+
+\section{L'algorithme TL2}
+Pour résoudre les problèmes de concurrence, c'est à dire les incohérences, qui peuvent apparaître lors d'une utilisation de ressources partagées par plusieurs threads, une approche classique est d'utiliser des verrous.
+Seulement, cette approche se révèle souvent soit inefficace avec un verrouillage gros grain, soit complexe lors d'un verrouillage grain fin. Une autre approche existe avec les solutions non bloquantes et les instructions spéciales, mais cette solution souffre des mêmes problèmes que la première. Une autre solution est la mise en place d'une transaction, où la section critique est délimitée par les appels aux fonctions begin et tryToCommit. Dans la section critique, on peut écrire et lire dans des registres à l'aide de fonctions read et write. Au moment de l'appel à tryToCommit, soit l'appel est un succès et les changements sont appliquées aux variables partagées, soit la transaction aborte et c'est comme si il ne s'était rien passé. On peut alors tenter de renouveler la transaction jusqu'à ce qu'elle réussisse. Cette approche s'appelle la mémoire transactionnelle logicielle, et l'algorithme TL2 en fait partie. 
+
+Avec TL2, une écriture sur un registre par une transaction écrit en faite sur une copie locale ce registre dans cette transaction. Si cette copie n'existe pas, on la créer en faisant une copie du registre partagé.
+\begin{lstlisting}[caption = write]
+public void write(Transaction transaction, Object value) {
+    if (transaction.getLocalCopies().get(this) == null) {
+        transaction.getLocalCopies().put(this, this.makeCopy());
+    }
+    transaction.getLocalCopies().get(this).setValue(value);
+    transaction.getLocallyWritten().add(this);
+    lastTransactionWriter = transaction; // used for the read method
+}
+\end{lstlisting}
+
+Dans une transaction, on sauvegarde les copies locales des registres qu'on a lu ou écrit dans une map qui a pour clé les registres partagés et pour valeurs les copies locales de ces registres avec les valeurs qu'on veut soumettre.
+\begin{lstlisting}[caption = localCopies]
+// maps a register to its local copy with new value
+private Map<Register, Register> localCopies = new HashMap<>(); 
+\end{lstlisting}
+
+Ce n'est que lors du commit que la copie locale pourra être écrite sur le registre partagé, si cette transaction n'aborte pas.
+
+Lors d'une lecture, on retourne la valeur locale du registre si elle est à jour. Sinon, on la met à jour et on la retourne.
+\begin{lstlisting}[caption = read]
+public Object read(Transaction transaction) throws CustomAbortException {
+    // if the register has been written by the same transaction, we return its value
+    if (transaction.getLocalCopies().get(this) != null && lastTransactionWriter == transaction) {
+        return transaction.getLocalCopies().get(this).value;
+    } else {
+        transaction.getLocalCopies().put(this, this.makeCopy());
+        transaction.getLocallyRead().add(this);
+        // transaction has possibly read other values that are no longer consistent
+        // with the value of register just obtained, in that case we abort
+        if (transaction.getLocalCopies().get(this).date > transaction.getBirthdate()) {
+            throw new CustomAbortException("Date incoherence");
+        } else {
+            return transaction.getLocalCopies().get(this).value;
+        }
+    }
+}
+\end{lstlisting}
+
+On a vu que la transaction sauvegarde tous les registres qu'elle a lu ou ceux dans lesquels elle a écrit. Dans cette sauvegarde du registre, on trouve la nouvelle valeur et la date de la dernière modification de ce registre. Cette date nous permet d'aborter le commit si la lecture des registres n'est pas cohérente les uns avec les autres. Cette vérification doit être linéarisable et thread safe. Nous adresserons ce problème dans une prochaine partie.
+\begin{lstlisting}[caption = commit]
+/* checks if the current values of the objects register it has read are still mutually consistent,
+and consistent with respect to the new values it has (locally) written
+if one of these dates is greater than its birthdate,
+there is a possible inconsistency and consequently transaction is aborted */
+for (Register lrst : locallyRead) {
+    if (lrst.getDate() > birthdate) {
+        throw new CustomAbortException("Date incoherence");
+    }
+}
+Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+for (Register register : locallyWritten) { // makes our local change visible to all the threads
+    register.setValue(localCopies.get(register).getValue());
+    register.setDate(commitDate);
+}
+isCommited = true;
+\end{lstlisting}
+
+
+\section{Adapatation du Dictionnaire pour TL2}
+Le dictionnaire correspond à un set de String. Ces String sont ordonnées par ordre lexicographique , et on optimise la gestion de la mémoire en encodant les préfixes communs une seule fois.
+
+\figuremacro{h}{dico}{Dictionnaire}{ par Matthieu Perrin}{1.0}
+
+Cette structure de donnée a une seule fonction d'ajout, qui retourne faux si le dictionnaire contient le mot, et vrai sinon. Cette fonction n'est pas thread safe, car il peut y avoir plusieurs threads qui modifient le dictionnaire en même temps, générant des incohérences. Par exemple, un même mot peut être ajouté plusieurs fois au dictionnaire.
+
+Une solution est de rendre cette structure de donnée immuable, comme si l'on voulait pouvoir faire de l'optimistic locking. C'est à dire lire le dictionnaire, y faire nos modifications, et soumettre nos modifications si le dictionnaire n'a pas changé entre temps. Il faut que cette vérification soit atomique, pour cela, on utilise une AtomicReference<V> en Java, avec sa méthode compareAndSet(V expect, V update). Et on boucle tant que le compareAndSet ne réussie pas. Dans notre cas, c'est la même chose si ce n'est que les instructions spéciales sont remplacées par les transactions.
+
+La fonction d'ajout est donc modifiée pour répondre à ce besoin. Elle retourne le même pointeur si l'ajout a échoué (la valeur était déjà contenu), ou un nouveau pointeur vers le dictionnaire modifié sinon. Ainsi, un thread ne peut pas modifier le dictionnaire d'un autre thread. La copie est faite un surchargeant la méthode clone. Le choix a été fait de faire une deep copy plutôt qu'une shallow copy, pour assurer la déclaration de la phrase précédente, au dépit de la performance.
+\begin{lstlisting}
+public DictionaryImmutable add(String s) {
+    DictionaryImmutable newDictionary = null;
+    try {
+        newDictionary = (DictionaryImmutable) this.clone();
+    } catch (CloneNotSupportedException e) {
+        e.printStackTrace();
+    }
+    boolean addSuccessful;
+
+    if (s != "") {
+        addSuccessful = newDictionary.start.add(s, 0);
+    }else{
+        addSuccessful = newDictionary.emptyAbsent;
+        newDictionary.emptyAbsent = false;
+    }
+    return addSuccessful ? newDictionary : this;
+}
+\end{lstlisting}
+
+\section{Sur l'interblocage et la famine}
+Notre dictionnaire est prêt à être utilisé dans un contexte multi coeurs. Cependant, la fonction commit présentée au début n'est toujours pas thread safe. En effet, cette fonction doit être linéarisable pour éviter les problèmes de cohérence. Les threads doivent donc demander un verrou sur les registres qu'ils modifient. On pourrait encadrer la fonction dans un bloc synchronized, mais cela ne résoudrait pas les problèmes de famine. D'un autre côté, une mauvaise gestion des verrous peut entraîner des interblocages. Nous allons voir deux solutions possibles à ce problème.
+
+\subsection{Théorème de l'ordre sur les verrous}
+On peut établir l'ordre d'acquisition des verrous sur les registres sans interblocage grâce à une méthode utilisée pour le diner des philosophes. On associe un numéro à chaque verrou, et on oblige les transactions à demander les verrous dans l'ordre. Ainsi, il n'y aura pas d'interblocage. En elle même, cette solution ne résout pas la famine. Pour répondre à ce problème, on peut utiliser un ReentrantLock avec true en paramètre de constructeur. Cela a pour effet de garantir l'équité dans l'offre des verrous.
+
+\begin{lstlisting}
+private void orderedLocking() throws CustomAbortException {
+
+    // fusions registers we need a lock on (locallyWritten & locallyRead)
+    List<Register> registers = makeUnionOfRegisters();
+
+    // orders registers by their number
+    Collections.sort(registers, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
+
+	// asks for a lock
+    for (Register register : registers) { register.getLock().lock(); } 
+
+    try {
+    
+        for (Register lrst : locallyRead) {
+            if (lrst.getDate() > birthdate) { throw new CustomAbortException("Date incoherence"); }
+        }
+        
+        Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+        
+        for (Register register : locallyWritten) {
+            register.setValue(localCopies.get(register).getValue());
+            register.setDate(commitDate);
+        }
+        
+        isCommited = true;
+        
+    } finally {
+		for (Register register : registers) { register.getLock().unlock(); }
+    }
+}
+\end{lstlisting}
+
+\subsection{Intervention d'un arbitre}
+Une autre solution est l'intervention d'un arbitre, qui est un point de passage obligatoire pour l'acquisition des verrous. Ainsi, il peut facilement vérifier que la demande ne génère pas d'interblocage et peut résoudre la famine en utilisant une queue sur la demande de verrous par les threads. Cependant, cette méthode peut ralentir la parallélisation. En effet, l'arbitre ne donne normalement les verrous qu'à un seul thread à la fois pour éviter les problèmes. Dans notre implémentation, nous avons autorisé l'offre de verrous en parallèle si ceux ci sont disjoints. Dans notre cas, il n'y a qu'un seul registre pour le dictionnaire, alors cela ne change rien. 
+
+\begin{lstlisting}
+private void arbitratorLocking() throws CustomAbortException {
+    while (!Arbitrator.askForLocks(makeUnionOfRegisters())) {}
+    try {
+        for (Register lrst : locallyRead) {
+            if (lrst.getDate() > birthdate) {
+                throw new CustomAbortException("Date incoherence");
+            }
+        }
+        Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
+        for (Register register : locallyWritten) {
+            register.setValue(localCopies.get(register).getValue());
+            register.setDate(commitDate);
+        }
+        isCommited = true;
+    } finally {
+        Arbitrator.releaseLocks(makeUnionOfRegisters());
+    }
+}
+\end{lstlisting}
+
+On utilise un set qui est thread-safe pour pouvoir libérer les registres sans avoir besoin du verrou de l'arbitre. Pour une raison encore à déterminer, le programme ne fonctionne pas avec une ConcurrentSkipListSet. On remarque qu'il est possible d'implémenter l'arbitre en lock free. 
+
+\begin{lstlisting}
+public class Arbitrator {
+
+    private static Set<Register> lockedRegisters = new CopyOnWriteArraySet<>();
+    private static ReentrantLock reentrantLock = new ReentrantLock(true);
+
+    public static boolean askForLocks(List<Register> registers) {
+        Arbitrator.reentrantLock.lock();
+        try {
+            for (Register r : registers) { if (lockedRegisters.contains(r)) return false; }
+            lockedRegisters.addAll(registers);
+        }finally {
+            Arbitrator.reentrantLock.unlock();
+        }
+        return true;
+    }
+
+    public static void releaseLocks(List<Register> registers) {
+        // if the set is thread safe, no lock needed for releasing the registers
+        lockedRegisters.removeAll(registers);
+    }
+}
+\end{lstlisting}
+
+\bibliographystyle{ieeetr}
+\bibliography{references_louis_boursier}
+		
+\end{document}
