@@ -23,10 +23,10 @@ public class Arbitrator {
         try {
             for (Register r : registers) { if (lockedRegisters.contains(r)) return false; }
             lockedRegisters.addAll(registers);
+            return true;
         }finally {
             Arbitrator.reentrantLock.unlock();
         }
-        return true;
     }
 
     public static void releaseLocks(List<Register> registers) {

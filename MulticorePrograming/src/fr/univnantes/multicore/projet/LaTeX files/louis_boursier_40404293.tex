@@ -218,22 +218,25 @@ private void orderedLocking() throws CustomAbortException {
 Une autre solution est l'intervention d'un arbitre, qui est un point de passage obligatoire pour l'acquisition des verrous. Ainsi, il peut facilement vérifier que la demande ne génère pas d'interblocage et peut résoudre la famine en utilisant une queue sur la demande de verrous par les threads. Cependant, cette méthode peut ralentir la parallélisation. En effet, l'arbitre ne donne normalement les verrous qu'à un seul thread à la fois pour éviter les problèmes. Dans notre implémentation, nous avons autorisé l'offre de verrous en parallèle si ceux ci sont disjoints. Dans notre cas, il n'y a qu'un seul registre pour le dictionnaire, alors cela ne change rien. 
 
 \begin{lstlisting}
-private void arbitratorLocking() throws CustomAbortException {
-    while (!Arbitrator.askForLocks(makeUnionOfRegisters())) {}
-    try {
-        for (Register lrst : locallyRead) {
-            if (lrst.getDate() > birthdate) {
-                throw new CustomAbortException("Date incoherence");
-            }
+public class Arbitrator {
+
+    private static Set<Register> lockedRegisters = new CopyOnWriteArraySet<>();
+    private static ReentrantLock reentrantLock = new ReentrantLock(true);
+
+    public static boolean askForLocks(List<Register> registers) {
+        Arbitrator.reentrantLock.lock();
+        try {
+            for (Register r : registers) { if (lockedRegisters.contains(r)) return false; }
+            lockedRegisters.addAll(registers);
+            return true;
+        }finally {
+            Arbitrator.reentrantLock.unlock();
         }
-        Integer commitDate = EventuallyCommittedTest.globalClock.incrementAndGet();
-        for (Register register : locallyWritten) {
-            register.setValue(localCopies.get(register).getValue());
-            register.setDate(commitDate);
-        }
-        isCommited = true;
-    } finally {
-        Arbitrator.releaseLocks(makeUnionOfRegisters());
+    }
+
+    public static void releaseLocks(List<Register> registers) {
+        // if the set is thread safe, no lock needed for releasing the registers
+        lockedRegisters.removeAll(registers);
     }
 }
 \end{lstlisting}
