@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Verifies that all transactions eventually succeed to commit in a high throughput environment
  *
- * @author Louis boursier
+ * @author Louis boursier - Eloi Filaudeau
  * Date: 15/03/2020
  */
 public class EventuallyCommittedTest {

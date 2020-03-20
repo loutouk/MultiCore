@@ -6,7 +6,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author Louis boursier
+ * @author Louis boursier - Eloi Filaudeau
  * Date: 19/03/2020
  * Arbitrator should only give access to shared resources to one thread at a time to ensure no deadlock
  * But if an other thread ask for a lock on unused resources, we can give them to speed up the process

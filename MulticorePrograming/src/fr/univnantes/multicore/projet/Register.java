@@ -3,7 +3,7 @@ package fr.univnantes.multicore.projet;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author Louis boursier
+ * @author Louis boursier - Eloi Filaudeau
  * Date: 15/03/2020
  */
 public class Register<T> implements IRegister {

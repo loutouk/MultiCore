@@ -1,7 +1,7 @@
 package fr.univnantes.multicore.projet;
 
 /**
- * @author Louis boursier
+ * @author Louis boursier - Eloi Filaudeau
  * Date: 15/03/2020
  */
 public interface IRegister<T> {

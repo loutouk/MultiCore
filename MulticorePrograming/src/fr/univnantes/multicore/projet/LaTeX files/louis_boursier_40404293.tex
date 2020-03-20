@@ -83,7 +83,7 @@
 
 \section{L'algorithme TL2}
 Pour résoudre les problèmes de concurrence, c'est à dire les incohérences, qui peuvent apparaître lors d'une utilisation de ressources partagées par plusieurs threads, une approche classique est d'utiliser des verrous.
-Seulement, cette approche se révèle souvent soit inefficace avec un verrouillage gros grain, soit complexe lors d'un verrouillage grain fin. Une autre approche existe avec les solutions non bloquantes et les instructions spéciales, mais cette solution souffre des mêmes problèmes que la première. Une autre solution est la mise en place d'une transaction, où la section critique est délimitée par les appels aux fonctions begin et tryToCommit. Dans la section critique, on peut écrire et lire dans des registres à l'aide de fonctions read et write. Au moment de l'appel à tryToCommit, soit l'appel est un succès et les changements sont appliquées aux variables partagées, soit la transaction aborte et c'est comme si il ne s'était rien passé. On peut alors tenter de renouveler la transaction jusqu'à ce qu'elle réussisse. Cette approche s'appelle la mémoire transactionnelle logicielle, et l'algorithme TL2 en fait partie. 
+Seulement, cette approche se révèle souvent soit inefficace avec un verrouillage gros grain, soit complexe lors d'un verrouillage grain fin. Une autre approche existe avec les solutions non bloquantes et les instructions spéciales, mais cette solution souffre des mêmes problèmes que la première. Une autre solution est la mise en place d'une transaction, où la section critique est délimitée par les appels aux fonctions begin et tryToCommit. Dans la section critique, on peut écrire et lire dans des registres à l'aide de fonctions read et write. Au moment de l'appel à tryToCommit, soit l'appel est un succès et les changements sont appliquées aux variables partagées, soit la transaction annule et c'est comme si il ne s'était rien passé. On peut alors tenter de renouveler la transaction jusqu'à ce qu'elle réussisse. Cette approche s'appelle la mémoire transactionnelle logicielle, et l'algorithme TL2 en fait partie. 
 
 Avec TL2, une écriture sur un registre par une transaction écrit en faite sur une copie locale ce registre dans cette transaction. Si cette copie n'existe pas, on la créer en faisant une copie du registre partagé.
 \begin{lstlisting}[caption = write]
@@ -103,7 +103,7 @@ Dans une transaction, on sauvegarde les copies locales des registres qu'on a lu 
 private Map<Register, Register> localCopies = new HashMap<>(); 
 \end{lstlisting}
 
-Ce n'est que lors du commit que la copie locale pourra être écrite sur le registre partagé, si cette transaction n'aborte pas.
+Ce n'est que lors du commit que la copie locale pourra être écrite sur le registre partagé, si cette transaction n'annule pas.
 
 Lors d'une lecture, on retourne la valeur locale du registre si elle est à jour. Sinon, on la met à jour et on la retourne.
 \begin{lstlisting}[caption = read]
@@ -125,7 +125,7 @@ public Object read(Transaction transaction) throws CustomAbortException {
 }
 \end{lstlisting}
 
-On a vu que la transaction sauvegarde tous les registres qu'elle a lu ou ceux dans lesquels elle a écrit. Dans cette sauvegarde du registre, on trouve la nouvelle valeur et la date de la dernière modification de ce registre. Cette date nous permet d'aborter le commit si la lecture des registres n'est pas cohérente les uns avec les autres. Cette vérification doit être linéarisable et thread safe. Nous adresserons ce problème dans une prochaine partie.
+On a vu que la transaction sauvegarde tous les registres qu'elle a lu ou ceux dans lesquels elle a écrit. Dans cette sauvegarde du registre, on trouve la nouvelle valeur et la date de la dernière modification de ce registre. Cette date nous permet d'annuler le commit si la lecture des registres n'est pas cohérente les uns avec les autres. Cette vérification doit être linéarisable et thread safe. Nous adresserons ce problème dans une prochaine partie.
 \begin{lstlisting}[caption = commit]
 /* checks if the current values of the objects register it has read are still mutually consistent,
 and consistent with respect to the new values it has (locally) written
@@ -154,7 +154,7 @@ Cette structure de donnée a une seule fonction d'ajout, qui retourne faux si le
 
 Une solution est de rendre cette structure de donnée immuable, comme si l'on voulait pouvoir faire de l'optimistic locking. C'est à dire lire le dictionnaire, y faire nos modifications, et soumettre nos modifications si le dictionnaire n'a pas changé entre temps. Il faut que cette vérification soit atomique, pour cela, on utilise une AtomicReference<V> en Java, avec sa méthode compareAndSet(V expect, V update). Et on boucle tant que le compareAndSet ne réussie pas. Dans notre cas, c'est la même chose si ce n'est que les instructions spéciales sont remplacées par les transactions.
 
-La fonction d'ajout est donc modifiée pour répondre à ce besoin. Elle retourne le même pointeur si l'ajout a échoué (la valeur était déjà contenu), ou un nouveau pointeur vers le dictionnaire modifié sinon. Ainsi, un thread ne peut pas modifier le dictionnaire d'un autre thread. La copie est faite un surchargeant la méthode clone. Le choix a été fait de faire une deep copy plutôt qu'une shallow copy, pour assurer la déclaration de la phrase précédente, au dépit de la performance.
+La fonction d'ajout est donc modifiée pour répondre à ce besoin. Elle retourne le même pointeur si l'ajout a échoué (la valeur était déjà contenue), ou un nouveau pointeur vers le dictionnaire modifié sinon. Ainsi, un thread ne peut pas modifier le dictionnaire d'un autre thread. La copie est faite en surchargeant la méthode clone. Le choix a été fait de faire une deep copy plutôt qu'une shallow copy, pour assurer la déclaration de la phrase précédente, au dépit de la performance.
 \begin{lstlisting}
 public DictionaryImmutable add(String s) {
     DictionaryImmutable newDictionary = null;
