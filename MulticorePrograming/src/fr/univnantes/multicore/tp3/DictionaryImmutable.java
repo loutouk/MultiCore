@@ -26,14 +26,12 @@ public class DictionaryImmutable implements Cloneable {
      * @return The reference to the new dictionary. Same pointer if the add failed (data already there), new pointer otherwise.
      */
     public DictionaryImmutable add(String s) {
-
         DictionaryImmutable newDictionary = null;
         try {
             newDictionary = (DictionaryImmutable) this.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-
         boolean addSuccessful;
 
         if (s != "") {
@@ -42,7 +40,6 @@ public class DictionaryImmutable implements Cloneable {
             addSuccessful = newDictionary.emptyAbsent;
             newDictionary.emptyAbsent = false;
         }
-
         return addSuccessful ? newDictionary : this;
     }
 

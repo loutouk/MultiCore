@@ -55,14 +55,9 @@ public class Transaction implements ITransaction {
      * @throws CustomAbortException
      */
     private void arbitratorLocking() throws CustomAbortException {
-        while (!Arbitrator.askForLocks(makeUnionOfRegisters())) {
-        }
+        while (!Arbitrator.askForLocks(makeUnionOfRegisters())) {}
         try {
             for (Register lrst : locallyRead) {
-                /* checks if the current values of the objects register it has read are still mutually consistent,
-                   and consistent with respect to the new values it has (locally) written
-                   if one of these dates is greater than its birthdate,
-                   there is a possible inconsistency and consequently transaction is aborted */
                 if (lrst.getDate() > birthdate) {
                     throw new CustomAbortException("Date incoherence");
                 }
@@ -96,16 +91,14 @@ public class Transaction implements ITransaction {
      * however, with the fairness parameter given to the ReentrantLock constructor, it should not starve
      */
     private void orderedLocking() throws CustomAbortException {
-        // order registers by their number
-        Collections.sort(locallyWritten, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
-        for (Register lwst : locallyWritten) {
-            lwst.getLock().lock();
-        } // asks for a lock
 
-        Collections.sort(locallyRead, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
-        for (Register lrst : locallyRead) {
-            lrst.getLock().lock();
-        } // asks for a lock
+        // fusions registers we need a lock on (locallyWritten & locallyRead)
+        List<Register> registers = makeUnionOfRegisters();
+
+        // orders registers by their number
+        Collections.sort(registers, (o1, o2) -> o1.getRegisterNumber() - o2.getRegisterNumber());
+
+        for (Register register : registers) { register.getLock().lock(); } // asks for a lock
 
         try {
             for (Register lrst : locallyRead) {
@@ -124,12 +117,7 @@ public class Transaction implements ITransaction {
             }
             isCommited = true;
         } finally {
-            for (Register lwst : locallyWritten) {
-                lwst.getLock().unlock();
-            }
-            for (Register lrst : locallyRead) {
-                lrst.getLock().unlock();
-            }
+            for (Register register : registers) { register.getLock().unlock(); }
         }
     }
 
